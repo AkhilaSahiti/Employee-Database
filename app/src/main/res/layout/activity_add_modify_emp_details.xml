@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="2">
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="start"
+            android:hint="Id: "
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enter_the_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_gravity="start"
+            android:hint=" Enter id"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_gravity="start"
+            android:hint="Name: "
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enter_the_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_gravity="start"
+            android:hint=" Enter Name"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/designation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_gravity="start"
+            android:hint="Designation: "
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enter_the_designation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_gravity="start"
+            android:hint=" Enter designation"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_gravity="start"
+            android:hint="Field: "
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enter_the_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_gravity="start"
+            android:hint=" Enter Field"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:layout_gravity="start"
+            android:hint="Email: "
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enter_the_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="4"
+            android:layout_column="1"
+            android:layout_gravity="start"
+            android:hint=" Enter Email"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="5"
+            android:layout_column="0"
+            android:layout_gravity="start"
+            android:hint="Phone: "
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enter_the_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="5"
+            android:layout_column="1"
+            android:layout_gravity="start"
+            android:hint="Enter Phone"
+            android:inputType="number"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="6"
+            android:layout_column="0"
+            android:layout_gravity="start"
+            android:hint="Salary: "
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enter_the_salary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="6"
+            android:layout_column="1"
+            android:layout_gravity="start"
+            android:hint="Enter Salary"
+            android:inputType="number"
+            android:textColor="@android:color/black" />
+    </GridLayout>
+
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="80dp"
+        android:text="Save" />
+</LinearLayout>
