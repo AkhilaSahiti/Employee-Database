@@ -1,6 +1,8 @@
 package com.example.employeedatabase.models;
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
     private int id;
     private String name;
     private String designation;
@@ -12,7 +14,7 @@ public class Employee {
     public Employee(){ }
 
 
-    public Employee(int id, String name, String designation, String field, String email, int phone, int salary){   //, int photo) {
+    public Employee(int id, String name, String designation, String field, String email, int phone, int salary, int photo) {
         this.id = id;
         this.name = name;
         this.designation = designation;

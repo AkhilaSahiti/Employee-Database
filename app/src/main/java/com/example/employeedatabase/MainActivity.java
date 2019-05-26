@@ -14,19 +14,17 @@ import android.widget.Toast;
 
 import com.example.employeedatabase.adapter.EmployeeAdapter;
 import com.example.employeedatabase.models.Employee;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EmployeeAdapter.EmployeeAdapterCallback{
 
     //List<Employee> employeeList = new ArrayList<>();
     public static EmployeeAdapter employeeAdapter;
     RecyclerView recyclerView;
     EmployeeDatabase employeeDatabase;
 
-    public static void notifyAdapter() {
-        employeeAdapter.notifyDataSetChanged();
-    }
     //ImageButton search_btn, add_btn, edit_btn;
     //EditText find_name;
 
@@ -46,14 +44,43 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-        employeeAdapter = new EmployeeAdapter(this, employeeDatabase.getAllData(), employeeDatabase);
+        ImageButton search_btn = (ImageButton) findViewById(R.id.search_btn);
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search();
+            }
+        });
+        employeeAdapter = new EmployeeAdapter(this, employeeDatabase.getAllData(), employeeDatabase, this);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(employeeAdapter);
 
+    }
 
+    public static void notifyAdapter() {
+        employeeAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onEmployeeClicked(Employee employee) {
+        Intent intent = new Intent(this, DisplayScreenActivity.class);
+        intent.putExtra("employee", employee);
+        startActivity(intent);
+    }
+    public void search(){
+        EmployeeDatabase employeeDatabase = new EmployeeDatabase(this);
+        EditText find_name = (EditText) findViewById(R.id.search);
+        Employee employee = employeeDatabase.findData(find_name.getText().toString());
+        if (employee !=null){
+            Intent intent = new Intent(this, DisplayScreenActivity.class);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"No match found", Toast.LENGTH_SHORT).show();
+        }
     }
 }
         /*employeeList = employeeDatabase.getAllData();
@@ -91,21 +118,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void search(){
-        EmployeeDatabase employeeDatabase = new EmployeeDatabase(this);
-        Employee employee = employeeDatabase.findData(find_name.getText().toString());
-        if (employee !=null){
-            Intent intent = new Intent(this, DisplayScreenActivity.class);
-            startActivity(intent);
-        }
-        else {
-            Toast.makeText(getApplicationContext(),"No match found", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void add(){
-        startActivity(new Intent(MainActivity.this, addModifyEmpDetails.class));
     }
 }*/

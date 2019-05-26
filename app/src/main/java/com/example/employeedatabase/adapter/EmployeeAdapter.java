@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.employeedatabase.EditDataActivity;
 import com.example.employeedatabase.EmployeeDatabase;
+import com.example.employeedatabase.MainActivity;
 import com.example.employeedatabase.R;
 import com.example.employeedatabase.models.Employee;
 
@@ -27,11 +28,12 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     private Context context;
     private List<Employee> employeeList;
     private EmployeeDatabase employeeDatabase;
-    //private EmployeeAdapterCallback listener;
+    private EmployeeAdapterCallback listener;
 
-    /*public interface EmployeeAdapterCallback {
+    public interface EmployeeAdapterCallback {
         void onEmployeeClicked(Employee employee);
-    }*/
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         public TextView name, designation, field;
@@ -51,11 +53,11 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     }
 
 
-    public EmployeeAdapter(Context context, List<Employee> employeeList, EmployeeDatabase employeeDatabase) {
+    public EmployeeAdapter(Context context, List<Employee> employeeList, EmployeeDatabase employeeDatabase, EmployeeAdapterCallback listener) {
         this.context = context;
         this.employeeList = employeeList;
         this.employeeDatabase = employeeDatabase;
-        //this.listener = listener;
+        this.listener = listener;
     }
 
     @NonNull
@@ -101,12 +103,12 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             }
         });
 
-        /*viewHolder.mainLayout.setOnClickListener(new View.OnClickListener() {
+        viewHolder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onEmployeeClicked(employeeList.get(viewHolder.getAdapterPosition()));
+                listener.onEmployeeClicked(employeeList.get(viewHolder.getAdapterPosition()));
             }
-        });*/
+        });
     }
 
 

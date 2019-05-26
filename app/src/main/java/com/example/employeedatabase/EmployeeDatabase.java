@@ -33,8 +33,7 @@ public class EmployeeDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + tableName + " (" + column_id + " INTEGER, " + column_name + " TEXT, " + column_designation + " TEXT, " + column_field + " TEXT, " + column_email + " TEXT, " + column_phone + " INTEGER, " + column_salary + " INTEGER);";
-        db.execSQL(CREATE_TABLE);
+        db.execSQL("CREATE TABLE " + tableName + " (" + column_id + " INTEGER PRIMARY KEY AUTOINCREMENT," + column_name + " TEXT, " + column_designation + " TEXT, " + column_field + " TEXT, " + column_email + " TEXT, " + column_phone + " INTEGER, " + column_salary + " INTEGER" +")" );
     }
 
     @Override
@@ -78,14 +77,14 @@ public class EmployeeDatabase extends SQLiteOpenHelper {
         values.put(column_phone, employee.getPhone());
         values.put(column_salary, employee.getSalary());
 
-        return db.update(tableName, values, "column_id" + " = ?", new String[]{String.valueOf(employee.getId())});
+        return db.update(tableName, values, "id" + " = ?", new String[]{String.valueOf(employee.getId())});
     }
 
-    public Employee findData(long id) {
+    public Employee findData(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(tableName,
-                new String[]{column_id, column_name, column_designation, column_field, column_email, column_phone, column_salary}, column_id + "=?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
+                new String[]{column_id, column_name, column_designation, column_field, column_email, column_phone, column_salary}, column_name + "=?",
+                new String[]{String.valueOf(name)}, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }

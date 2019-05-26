@@ -18,53 +18,56 @@ public class DisplayScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_screen);
         Intent intent = getIntent();
-        final Employee employee = (Employee) intent.getSerializableExtra("find_value");
+        final Employee employee = (Employee) intent.getSerializableExtra("employee");
 
-            TextView name = (TextView) findViewById(R.id.emp_name);
-            name.setText(employee.getName());
+        TextView id = (TextView) findViewById(R.id.emp_id);
+        id.setText(String.valueOf(employee.getId()));
 
-            TextView designation = (TextView) findViewById(R.id.emp_designation);
-            designation.setText(employee.getDesignation());
+        TextView name = (TextView) findViewById(R.id.emp_name);
+        name.setText(employee.getName());
 
-            TextView field = (TextView) findViewById(R.id.emp_field);
-            field.setText(employee.getField());
+        TextView designation = (TextView) findViewById(R.id.emp_designation);
+        designation.setText(employee.getDesignation());
 
-            TextView email = (TextView) findViewById(R.id.emp_email);
-            email.setText(employee.getEmail());
+        TextView field = (TextView) findViewById(R.id.emp_field);
+        field.setText(employee.getField());
 
-            TextView phone = (TextView) findViewById(R.id.emp_phone);
-            phone.setText(String.valueOf(employee.getPhone()));
+        TextView email = (TextView) findViewById(R.id.emp_email);
+        email.setText(employee.getEmail());
 
-            TextView salary = (TextView) findViewById(R.id.emp_salary);
-            salary.setText(String.valueOf(employee.getSalary()));
+        TextView phone = (TextView) findViewById(R.id.emp_phone);
+        phone.setText(String.valueOf(employee.getPhone()));
 
-            //ImageView photo = (ImageView) findViewById(R.id.image);
-            //photo.setImageResource(employee.getPhoto());
+        TextView salary = (TextView) findViewById(R.id.emp_salary);
+        salary.setText(String.valueOf(employee.getSalary()));
 
-            ImageButton emailbtn = (ImageButton) findViewById(R.id.emailbtn);
-            emailbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onemail(employee);
-                }
-            });
+        //ImageView photo = (ImageView) findViewById(R.id.image);
+        //photo.setImageResource(employee.getPhoto());
 
-            ImageButton messagebtn = (ImageButton) findViewById(R.id.messagebtn);
-            messagebtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onsms(employee);
-                }
-            });
+        ImageButton emailbtn = (ImageButton) findViewById(R.id.emailbtn);
+        emailbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onemail(employee);
+            }
+        });
 
-            ImageButton phonebtn = (ImageButton) findViewById(R.id.phonebtn);
-            phonebtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onphone();
-                }
-            });
-        }
+        ImageButton messagebtn = (ImageButton) findViewById(R.id.messagebtn);
+        messagebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onsms(employee);
+            }
+        });
+
+        ImageButton phonebtn = (ImageButton) findViewById(R.id.phonebtn);
+        phonebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onphone();
+            }
+        });
+    }
 
     protected void onemail(Employee employee) {
         Intent mailintent = new Intent(Intent.ACTION_SENDTO);

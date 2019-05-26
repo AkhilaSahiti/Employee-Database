@@ -14,11 +14,12 @@ import java.util.List;
 
 public class EditDataActivity extends AppCompatActivity {
     
-    Button edit_btn;
+    Button modify_btn;
     EditText edit_id, edit_name, edit_designation, edit_field, edit_email, edit_phone, edit_salary;
     String editId, editName, editDesignation, editField, editEmail, editPhone, editSalary;
     EmployeeDatabase db;
     int position;
+    String str_position;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +35,16 @@ public class EditDataActivity extends AppCompatActivity {
         edit_email= (EditText) findViewById(R.id.edit_email);
         edit_phone= (EditText) findViewById(R.id.edit_phone);
         edit_salary= (EditText) findViewById(R.id.edit_salary);
-        edit_btn = findViewById(R.id.edit_btn);
+        modify_btn = findViewById(R.id.modify_btn);
+        Bundle bundle = getIntent().getExtras();
+        str_position = bundle.getString("position");
         db = new EmployeeDatabase(this);
         employeeList.addAll(db.getAllData());
-        edit_btn.setOnClickListener(new View.OnClickListener() {
+        modify_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Employee employee = employeeList.get(position);
+
                 employee.setId(Integer.parseInt(edit_id.getText().toString()));
                 employee.setName(edit_name.getText().toString());
                 employee.setDesignation(edit_designation.getText().toString());
