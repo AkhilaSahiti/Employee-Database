@@ -9,12 +9,12 @@ public class Employee implements Serializable {
     private String field;
     private String email;
     private int phone;
-    private int salary;
-    private int photo;
+    private double salary;
+    private byte[] photo;
     public Employee(){ }
 
 
-    public Employee(int id, String name, String designation, String field, String email, int phone, int salary, int photo) {
+    public Employee(int id, String name, String designation, String field, String email, int phone, double salary, byte[] photo) {
         this.id = id;
         this.name = name;
         this.designation = designation;
@@ -25,17 +25,11 @@ public class Employee implements Serializable {
         this.photo = photo;
     }
 
-    /*public Employee(String name, String designation, String field) {
-        this.name = name;
-        this.designation = designation;
-        this.field = field;
-    }*/
-
     public int getId() {
         return id;
     }
 
-    public int getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
@@ -59,7 +53,7 @@ public class Employee implements Serializable {
         return phone;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
@@ -78,9 +72,9 @@ public class Employee implements Serializable {
         return phone;
     }
 
-    public int setSalary(int salary) { this.salary = salary;
+    public double setSalary(double salary) { this.salary = salary;
         return salary;
     }
 
-    public void setPhoto(int photo) { this.photo = photo;  }
+    public void setPhoto(byte[] photo) { this.photo = photo;  }
 }

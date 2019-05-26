@@ -24,6 +24,7 @@ public class EmployeeDatabase extends SQLiteOpenHelper {
     public static final String column_email = "email";
     public static final String column_phone = "phone";
     public static final String column_salary = "salary";
+    public static final String column_image = "image";
 
 
     public EmployeeDatabase(Context context) {
@@ -33,7 +34,7 @@ public class EmployeeDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + tableName + " (" + column_id + " INTEGER PRIMARY KEY AUTOINCREMENT," + column_name + " TEXT, " + column_designation + " TEXT, " + column_field + " TEXT, " + column_email + " TEXT, " + column_phone + " INTEGER, " + column_salary + " INTEGER" +")" );
+        db.execSQL("CREATE TABLE " + tableName + " (" + column_id + " INTEGER PRIMARY KEY AUTOINCREMENT," + column_name + " TEXT, " + column_designation + " TEXT, " + column_field + " TEXT, " + column_email + " TEXT, " + column_phone + " LONG, " + column_salary + " INTEGER, " + column_image + " BLOB " + ")" );
     }
 
     @Override
@@ -42,7 +43,7 @@ public class EmployeeDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long addData(int id, String name, String designation, String field, String email, int phone, int salary) {
+    public long addData(int id, String name, String designation, String field, String email, long phone, double salary, byte[] image) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -53,6 +54,7 @@ public class EmployeeDatabase extends SQLiteOpenHelper {
         values.put(column_field, email);
         values.put(column_phone, phone);
         values.put(column_salary, salary);
+        values.put(column_image, image);
         long result = db.insert(tableName, null, values);
         db.close();
         return result;
@@ -76,7 +78,7 @@ public class EmployeeDatabase extends SQLiteOpenHelper {
         values.put(column_email, employee.getEmail());
         values.put(column_phone, employee.getPhone());
         values.put(column_salary, employee.getSalary());
-
+        values.put(column_image, employee.getPhoto());
         return db.update(tableName, values, "id" + " = ?", new String[]{String.valueOf(employee.getId())});
     }
 
@@ -95,8 +97,9 @@ public class EmployeeDatabase extends SQLiteOpenHelper {
                 cursor.getString(cursor.getColumnIndex(column_field)),
                 cursor.getString(cursor.getColumnIndex(column_email)),
                 cursor.getInt(cursor.getColumnIndex(column_phone)),
-                cursor.getInt(cursor.getColumnIndex(column_salary))
-                );
+                cursor.getInt(cursor.getColumnIndex(column_salary)),
+                cursor.getBlob(cursor.getColumnIndex(column_image))
+        );
         cursor.close();
         return employee;
     }
@@ -118,6 +121,7 @@ public class EmployeeDatabase extends SQLiteOpenHelper {
                 employee.setEmail(cursor.getString(cursor.getColumnIndex(column_email)));
                 employee.setPhone(cursor.getInt(cursor.getColumnIndex(column_phone)));
                 employee.setSalary(cursor.getInt(cursor.getColumnIndex(column_salary)));
+                employee.setPhoto(cursor.getBlob(cursor.getColumnIndex(column_image)));
 
                 employees.add(employee);
             } while (cursor.moveToNext());

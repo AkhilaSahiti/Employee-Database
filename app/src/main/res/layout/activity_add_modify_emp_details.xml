@@ -2,12 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:layout_gravity="center"
     android:orientation="vertical">
+    <ImageView
+        android:id="@+id/image_display"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:padding="3dp"
+        android:layout_margin="10dp">
+    </ImageView>
+    <Button
+        android:id="@+id/image_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        android:text="Pick Image" />
+
 
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_column="2">
 
         <TextView
@@ -60,7 +79,7 @@
             android:hint="Designation: "
             android:textStyle="bold" />
 
-        <EditText
+        <Spinner
             android:id="@+id/enter_the_designation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +87,8 @@
             android:layout_column="1"
             android:layout_gravity="start"
             android:hint=" Enter designation"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:entries="@array/designations"/>
 
         <TextView
             android:id="@+id/field"
@@ -80,15 +100,16 @@
             android:hint="Field: "
             android:textStyle="bold" />
 
-        <EditText
+        <Spinner
             android:id="@+id/enter_the_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_row="3"
             android:layout_column="1"
-            android:layout_gravity="start"
+            android:layout_gravity="fill_horizontal"
             android:hint=" Enter Field"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:entries="@array/fields"/>
 
         <TextView
             android:id="@+id/email"
@@ -138,7 +159,7 @@
             android:layout_row="6"
             android:layout_column="0"
             android:layout_gravity="start"
-            android:hint="Salary: "
+            android:hint="Salary($): "
             android:textStyle="bold" />
 
         <EditText
@@ -158,6 +179,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:layout_margin="80dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
         android:text="Save" />
 </LinearLayout>

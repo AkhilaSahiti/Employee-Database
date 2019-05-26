@@ -43,7 +43,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
         android:orientation="horizontal">
 
         <TextView
@@ -162,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:textStyle="bold"
-            android:hint="Salary: " />
+            android:hint="Salary($): " />
 
         <TextView
             android:id="@+id/emp_salary"

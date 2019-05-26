@@ -1,11 +1,14 @@
 package com.example.employeedatabase;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.employeedatabase.models.Employee;
 
@@ -14,12 +17,14 @@ import java.util.List;
 
 public class EditDataActivity extends AppCompatActivity {
     
-    Button modify_btn;
+    Button modify_btn, image_btn;
     EditText edit_id, edit_name, edit_designation, edit_field, edit_email, edit_phone, edit_salary;
+    ImageView imageView;
     String editId, editName, editDesignation, editField, editEmail, editPhone, editSalary;
     EmployeeDatabase db;
     int position;
     String str_position;
+    //Bitmap thumbnail;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,7 @@ public class EditDataActivity extends AppCompatActivity {
         edit_phone= (EditText) findViewById(R.id.edit_phone);
         edit_salary= (EditText) findViewById(R.id.edit_salary);
         modify_btn = findViewById(R.id.modify_btn);
+        //image_btn = findViewById(R.id.image_btn);
         Bundle bundle = getIntent().getExtras();
         str_position = bundle.getString("position");
         db = new EmployeeDatabase(this);
@@ -60,5 +66,6 @@ public class EditDataActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 }

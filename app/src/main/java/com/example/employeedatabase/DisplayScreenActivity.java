@@ -1,13 +1,20 @@
 package com.example.employeedatabase;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.text.NumberFormat;
+import java.util.Currency;
+import java.util.Locale;
 
 import com.example.employeedatabase.models.Employee;
 
@@ -41,8 +48,8 @@ public class DisplayScreenActivity extends AppCompatActivity {
         TextView salary = (TextView) findViewById(R.id.emp_salary);
         salary.setText(String.valueOf(employee.getSalary()));
 
-        //ImageView photo = (ImageView) findViewById(R.id.image);
-        //photo.setImageResource(employee.getPhoto());
+        ImageView photo = (ImageView) findViewById(R.id.image);
+        photo.setImageBitmap(convertToBitmap(employee.getPhoto()));
 
         ImageButton emailbtn = (ImageButton) findViewById(R.id.emailbtn);
         emailbtn.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +74,9 @@ public class DisplayScreenActivity extends AppCompatActivity {
                 onphone();
             }
         });
+    }
+    private Bitmap convertToBitmap(byte[] b){
+        return BitmapFactory.decodeByteArray(b, 0, b.length);
     }
 
     protected void onemail(Employee employee) {

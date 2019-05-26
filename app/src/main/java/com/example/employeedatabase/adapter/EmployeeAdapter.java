@@ -2,6 +2,8 @@ package com.example.employeedatabase.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,7 +49,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             field = (TextView) itemView.findViewById(R.id.field);
             delete = (ImageButton) itemView.findViewById(R.id.delete);
             edit = (ImageButton) itemView.findViewById(R.id.edit_btn);
-            // imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            imageView = (ImageView) itemView.findViewById(R.id.imageView);
             mainLayout = (LinearLayout) itemView.findViewById(R.id.on_click);
         }
     }
@@ -74,7 +76,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         viewHolder.name.setText(employee.getName());
         viewHolder.designation.setText(employee.getDesignation());
         viewHolder.field.setText(employee.getField());
-        // viewHolder.imageView.setImageResource(employee.getPhoto());
+        viewHolder.imageView.setImageBitmap(convertToBitmap(employee.getPhoto()));
        /*viewHolder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +111,10 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 listener.onEmployeeClicked(employeeList.get(viewHolder.getAdapterPosition()));
             }
         });
+
+    }
+    private Bitmap convertToBitmap(byte[] b){
+        return BitmapFactory.decodeByteArray(b, 0, b.length);
     }
 
 

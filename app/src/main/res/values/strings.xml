@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">EmployeeDatabase</string>
+    <string name="designation">Designation:</string>
+    <string name="field">Field:</string>
+    <string name="salary">Salary($):</string>
+    <string-array name="fields">
+        <item>Choose any</item>
+        <item>Design</item>
+        <item>Marketing</item>
+        <item>Sales</item>
+        <item>Technology</item>
+    </string-array>
+    <string-array name="designations">
+        <item>Choose any</item>
+        <item>Assistant Director</item>
+        <item>Associate</item>
+        <item>Developer</item>
+        <item>Directory</item>
+        <item>Manager</item>
+        <item>Team Lead</item>
+    </string-array>
+
 </resources>
