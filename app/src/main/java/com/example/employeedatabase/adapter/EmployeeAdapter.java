@@ -1,64 +1,35 @@
 package com.example.employeedatabase.adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.employeedatabase.EditDataActivity;
-import com.example.employeedatabase.EmployeeDatabase;
-import com.example.employeedatabase.MainActivity;
 import com.example.employeedatabase.R;
 import com.example.employeedatabase.models.Employee;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
 public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHolder> {
-    private Context context;
     private List<Employee> employeeList;
-    private EmployeeDatabase employeeDatabase;
     private EmployeeAdapterCallback listener;
 
     public interface EmployeeAdapterCallback {
         void onEmployeeClicked(Employee employee);
+
+        void onEmployeeDelete(Employee employee);
+
+        void onEmployeeEdit(Employee employee);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        public TextView name, designation, field;
-        ImageButton delete, edit;
-        LinearLayout mainLayout;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name);
-            designation = (TextView) itemView.findViewById(R.id.designation);
-            field = (TextView) itemView.findViewById(R.id.field);
-            delete = (ImageButton) itemView.findViewById(R.id.delete);
-            edit = (ImageButton) itemView.findViewById(R.id.edit_btn);
-            imageView = (ImageView) itemView.findViewById(R.id.imageView);
-            mainLayout = (LinearLayout) itemView.findViewById(R.id.on_click);
-        }
-    }
-
-
-    public EmployeeAdapter(Context context, List<Employee> employeeList, EmployeeDatabase employeeDatabase, EmployeeAdapterCallback listener) {
-        this.context = context;
+    public EmployeeAdapter(List<Employee> employeeList, EmployeeAdapterCallback listener) {
         this.employeeList = employeeList;
-        this.employeeDatabase = employeeDatabase;
         this.listener = listener;
     }
 
@@ -76,82 +47,59 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         viewHolder.name.setText(employee.getName());
         viewHolder.designation.setText(employee.getDesignation());
         viewHolder.field.setText(employee.getField());
-        viewHolder.imageView.setImageBitmap(convertToBitmap(employee.getPhoto()));
-       /*viewHolder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edit(employee);
-            }
-        });*/
-
-        viewHolder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                deleteNote(viewHolder.getAdapterPosition());
-                /*employeeDatabase.delete(employee.getId());
-                Employee removedEmployee = employeeList.get(viewHolder.getAdapterPosition());
-                employeeList.remove(viewHolder.getAdapterPosition());
-                notifyItemRemoved(viewHolder.getAdapterPosition());*/
-            }
-        });
-        viewHolder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, String.valueOf(viewHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, EditDataActivity.class);
-                intent.putExtra("position", String.valueOf(viewHolder.getAdapterPosition()));
-                context.startActivity(intent);
-            }
-        });
-
-        viewHolder.mainLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onEmployeeClicked(employeeList.get(viewHolder.getAdapterPosition()));
-            }
-        });
-
+        //viewHolder.photo.setImageURI(Uri.parse(employee.getPhoto()));
     }
-    private Bitmap convertToBitmap(byte[] b){
-        return BitmapFactory.decodeByteArray(b, 0, b.length);
-    }
-
 
     @Override
     public int getItemCount() {
         return employeeList.size();
     }
 
-    private void deleteNote(int position){
-        employeeDatabase.deleteData(employeeList.get(position));
-        Employee removedEmployee = employeeList.get(position);
-        employeeList.remove(position);
-        notifyItemRemoved(position);
-    }
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView photo;
+        TextView name, designation, field;
+        ImageButton delete, edit;
+        LinearLayout mainLayout;
 
-   /* private void edit(final Employee employee){
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View subView = inflater.inflate(R.layout.activity_add_modify_emp_details, null);
+        ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            name = (TextView) itemView.findViewById(R.id.name);
+            designation = (TextView) itemView.findViewById(R.id.designation);
+            field = (TextView) itemView.findViewById(R.id.field);
+            delete = (ImageButton) itemView.findViewById(R.id.delete);
+            edit = (ImageButton) itemView.findViewById(R.id.edit_btn);
+            photo = (ImageView) itemView.findViewById(R.id.imageView);
+            mainLayout = (LinearLayout) itemView.findViewById(R.id.on_click);
 
-        final EditText id = (EditText)subView.findViewById(R.id.enter_id);
-        final EditText name = (EditText)subView.findViewById(R.id.enter_name);
-        final EditText designation = (EditText)subView.findViewById(R.id.enter_designation);
-        final EditText field = (EditText)subView.findViewById(R.id.enter_field);
-        final EditText email = (EditText)subView.findViewById(R.id.enter_email);
-        final EditText phone = (EditText)subView.findViewById(R.id.enter_phone);
-        final EditText salary = (EditText)subView.findViewById(R.id.enter_salary);
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!employeeList.isEmpty()) {
+                        Employee employee = employeeList.get(getAdapterPosition());
+                        employeeList.remove(getAdapterPosition());
+                        listener.onEmployeeDelete(employee);
+                        notifyItemRemoved(getAdapterPosition());
+                    }
+                }
+            });
 
-        if(employee!= null){
-            id.setText(employee.getId());
-            name.setText(employee.getName());
-            designation.setText(employee.getDesignation());
-            field.setText(employee.getField());
-            email.setText(employee.getEmail());
-            phone.setText(employee.getPhone());
-            salary.setText(employee.getSalary());
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!employeeList.isEmpty()) {
+                        listener.onEmployeeEdit(employeeList.get(getAdapterPosition()));
+                    }
+                }
+            });
+
+            mainLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!employeeList.isEmpty()) {
+                        listener.onEmployeeClicked(employeeList.get(getAdapterPosition()));
+                    }
+                }
+            });
         }
-    }*/
-
-
+    }
 }
