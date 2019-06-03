@@ -3,33 +3,21 @@ package com.example.employeedatabase.models;
 import java.io.Serializable;
 
 public class Employee implements Serializable {
-    private int id;
+    private String id;
     private String name;
     private String designation;
     private String field;
     private String email;
-    private int phone;
+    private long phone;
     private double salary;
-    private byte[] photo;
-    public Employee(){ }
+    private String photo;
 
-
-    public Employee(int id, String name, String designation, String field, String email, int phone, double salary, byte[] photo) {
-        this.id = id;
-        this.name = name;
-        this.designation = designation;
-        this.field = field;
-        this.email = email;
-        this.phone = phone;
-        this.salary = salary;
-        this.photo = photo;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public byte[] getPhoto() {
+
+    public String getPhoto() {
         return photo;
     }
 
@@ -49,7 +37,7 @@ public class Employee implements Serializable {
         return email;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
@@ -57,24 +45,37 @@ public class Employee implements Serializable {
         return salary;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public void setId(int id) { this.id = id;   }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
 
-    public void setDesignation(String designation) { this.designation = designation;    }
+    public void setField(String field) {
+        this.field = field;
+    }
 
-    public void setField(String field) { this.field = field;   }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public void setEmail(String email) { this.email = email; }
-
-    public int setPhone(int phone) { this.phone = phone;
+    public long setPhone(long phone) {
+        this.phone = phone;
         return phone;
     }
 
-    public double setSalary(double salary) { this.salary = salary;
+    public double setSalary(double salary) {
+        this.salary = salary;
         return salary;
     }
 
-    public void setPhoto(byte[] photo) { this.photo = photo;  }
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 }

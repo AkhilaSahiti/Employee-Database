@@ -1,5 +1,7 @@
 package com.example.employeedatabase.adapter;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,12 +15,23 @@ import android.widget.TextView;
 
 import com.example.employeedatabase.R;
 import com.example.employeedatabase.models.Employee;
+import com.example.employeedatabase.storage.ImageStorageManager;
 
 import java.util.List;
 
 public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHolder> {
-    private List<Employee> employeeList;
+    private List<Employee> employees;
     private EmployeeAdapterCallback listener;
+
+    public void addAll(List<Employee> employees) {
+        if (employees != null) {
+            if (this.employees != null && !this.employees.isEmpty()) {
+                this.employees.clear();
+            }
+            this.employees = employees;
+            notifyDataSetChanged();
+        }
+    }
 
     public interface EmployeeAdapterCallback {
         void onEmployeeClicked(Employee employee);
@@ -28,8 +41,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         void onEmployeeEdit(Employee employee);
     }
 
-    public EmployeeAdapter(List<Employee> employeeList, EmployeeAdapterCallback listener) {
-        this.employeeList = employeeList;
+    public EmployeeAdapter(EmployeeAdapterCallback listener) {
         this.listener = listener;
     }
 
@@ -42,17 +54,28 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
-        final Employee employee = employeeList.get(viewHolder.getAdapterPosition());
-
+        Employee employee = employees.get(viewHolder.getAdapterPosition());
         viewHolder.name.setText(employee.getName());
         viewHolder.designation.setText(employee.getDesignation());
         viewHolder.field.setText(employee.getField());
-        //viewHolder.photo.setImageURI(Uri.parse(employee.getPhoto()));
+        ImageStorageManager.getInstance().getPhoto(viewHolder.itemView.getContext(), employee.getPhoto(), new ImageStorageManager.ImageStorageCallback() {
+            @Override
+            public void onPhotoSaved(String fileName) {
+                //ToDo: Nothing
+            }
+
+            @Override
+            public void onPhotoGenerated(final Bitmap bitmap) {
+                if (bitmap != null) {
+                    viewHolder.photo.setImageBitmap(bitmap);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return employeeList.size();
+        return employees.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,20 +86,20 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name);
-            designation = (TextView) itemView.findViewById(R.id.designation);
-            field = (TextView) itemView.findViewById(R.id.field);
-            delete = (ImageButton) itemView.findViewById(R.id.delete);
-            edit = (ImageButton) itemView.findViewById(R.id.edit_btn);
-            photo = (ImageView) itemView.findViewById(R.id.imageView);
-            mainLayout = (LinearLayout) itemView.findViewById(R.id.on_click);
+            name = itemView.findViewById(R.id.name);
+            designation = itemView.findViewById(R.id.designation);
+            field = itemView.findViewById(R.id.field);
+            delete = itemView.findViewById(R.id.delete);
+            edit = itemView.findViewById(R.id.edit_btn);
+            photo = itemView.findViewById(R.id.imageView);
+            mainLayout = itemView.findViewById(R.id.on_click);
 
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!employeeList.isEmpty()) {
-                        Employee employee = employeeList.get(getAdapterPosition());
-                        employeeList.remove(getAdapterPosition());
+                    if (!employees.isEmpty()) {
+                        Employee employee = employees.get(getAdapterPosition());
+                        employees.remove(getAdapterPosition());
                         listener.onEmployeeDelete(employee);
                         notifyItemRemoved(getAdapterPosition());
                     }
@@ -86,8 +109,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!employeeList.isEmpty()) {
-                        listener.onEmployeeEdit(employeeList.get(getAdapterPosition()));
+                    if (!employees.isEmpty()) {
+                        listener.onEmployeeEdit(employees.get(getAdapterPosition()));
                     }
                 }
             });
@@ -95,8 +118,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             mainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!employeeList.isEmpty()) {
-                        listener.onEmployeeClicked(employeeList.get(getAdapterPosition()));
+                    if (!employees.isEmpty()) {
+                        listener.onEmployeeClicked(employees.get(getAdapterPosition()));
                     }
                 }
             });

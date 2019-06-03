@@ -11,10 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditDataActivity"></activity>
-        <activity android:name=".addModifyEmpDetails" />
-        <activity android:name=".DisplayScreenActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".AddEmployeeDetailsActivity" />
+        <activity android:name=".DisplayEmployeeActivity" />
+        <activity android:name=".EmployeeListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

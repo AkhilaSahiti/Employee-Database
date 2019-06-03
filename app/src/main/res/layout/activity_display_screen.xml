@@ -15,18 +15,19 @@
         android:src="@android:drawable/picture_frame"/>
 
 
-    <LinearLayout
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal">
+        android:layout_column="2"
+        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="1"
+            android:layout_column="0"
             android:hint="Id: "
             android:textStyle="bold" />
 
@@ -35,21 +36,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="1"
+            android:layout_column="1"
             android:textColor="@android:color/black"
             android:hint=" Employee ID" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="2"
+            android:layout_column="0"
             android:hint="Name: "
             android:textStyle="bold" />
 
@@ -58,20 +56,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="2"
+            android:layout_column="1"
             android:textColor="@android:color/black"
             android:hint=" Employee Name" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/designation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="3"
+            android:layout_column="0"
             android:textStyle="bold"
             android:hint="Designation: " />
 
@@ -80,19 +76,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="3"
+            android:layout_column="1"
             android:textColor="@android:color/black"
             android:hint=" Employee designation" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="4"
+            android:layout_column="0"
             android:textStyle="bold"
             android:hint="Field: " />
 
@@ -101,20 +96,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="4"
+            android:layout_column="1"
             android:textColor="@android:color/black"
             android:hint=" Employee Field" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="5"
+            android:layout_column="0"
             android:textStyle="bold"
             android:hint="Email: " />
 
@@ -123,21 +116,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="5"
+            android:layout_column="1"
             android:hint=" Employee Email"
             android:textColor="@android:color/black" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="6"
+            android:layout_column="0"
             android:textStyle="bold"
             android:hint="Phone: " />
 
@@ -146,20 +136,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="6"
+            android:layout_column="1"
             android:hint=" Employee Phone"
             android:textColor="@android:color/black" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/salary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="7"
+            android:layout_column="0"
             android:textStyle="bold"
             android:hint="Salary($): " />
 
@@ -168,9 +156,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_row="7"
+            android:layout_column="1"
             android:hint=" Employee Salary"
             android:textColor="@android:color/black" />
-    </LinearLayout>
+    </GridLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
